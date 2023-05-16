@@ -21,7 +21,7 @@ function writeFile(filePath, data, options, callback) {
 }
 
 writeFile(filePath, "Programming Language", { flag: "a" }, logError)
-console.log("同步");
+
 // 同步与异步
 
 
@@ -47,7 +47,7 @@ function writeStream(path, data, close = false) {
 }
 
 
-writeStream(streamFilePath, "劝君更尽一杯酒")
+writeStream(streamFilePath, "劝君更尽一杯酒",true)
 
 
 

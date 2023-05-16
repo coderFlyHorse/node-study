@@ -20,10 +20,10 @@ function readDir(path, callback) {
 }
 let fileList = readDir(readDirPath, logError)
 
-fileList.forEach((file,index) => {
+fileList.forEach((file, index) => {
     let filePath = path.resolve(__dirname, file)
-    let fileToPath = path.resolve(__dirname,'../资料', `0${index}file`)
-    reFileName(filePath,fileToPath)
+    let fileToPath = path.resolve(__dirname, `0${index}-${file}`)
+    reFileName(filePath, fileToPath)
 })
 
 function reFileName(renamePath, renameToPath) {
