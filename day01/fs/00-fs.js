@@ -54,7 +54,7 @@ writeStream(streamFilePath, "劝君更尽一杯酒",true)
 // fs 模块 读取 fs.readFile  异步
 // fs 模块 读取 fs.readFileSync 同步
 const readPath = path.resolve(__dirname, "stream.txt")
-function readFile(path, callback) {
+ function readFile(path, callback) {
     fs.readFile(path, (err, data) => {
         if (err) {
             callback(err, "读取失败")
