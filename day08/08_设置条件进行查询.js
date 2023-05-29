@@ -36,9 +36,10 @@ mongoose.connection.once('open', async () => {
     // let res = await BookModel.find({ $and: [{ price: { $gte: 30 } }, { price: { $lt: 50 } }] })
 
     // 正则表达式
-    let res = await BookModel.find({ name: new RegExp('三') })
-    console.log(res);
 
+    // let res = await BookModel.find({name:/三/ })
+    let res = await BookModel.find({name:new RegExp('三') })
+    console.log(res);
 
 
     mongoose.disconnect()
