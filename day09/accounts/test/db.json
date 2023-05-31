@@ -1,0 +1,23 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "lowdb is awesome"
+    },
+    {
+      "id": 1,
+      "title": "今天天气还不错"
+    },
+    {
+      "id": 1,
+      "title": "今天天气还不错"
+    },
+    {
+      "id": 1,
+      "title": "今天天气还不错"
+    }
+  ],
+  "user": {
+    "name": "typicode"
+  }
+}
