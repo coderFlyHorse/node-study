@@ -1,7 +1,20 @@
 {
-    "song":[
-        {"id":1,"name":"稻香","singer":"周杰伦"},
-        {"id":2,"name":"黄昏","singer":"周传雄"},
-        {"id":3,"name":"光辉岁月","singer":"beyond"}
-    ]
+  "song": [
+    {
+      "id": 1,
+      "name": "稻香",
+      "singer": "Jay"
+    },
+    {
+      "id": 2,
+      "name": "黄昏",
+      "singer": "周传雄"
+    },
+    {
+      "id": 3,
+      "name": "光辉岁月",
+      "singer": "beyond"
+    }
+  ],
+  "user": []
 }
