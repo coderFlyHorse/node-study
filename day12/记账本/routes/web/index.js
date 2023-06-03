@@ -1,9 +1,11 @@
 var express = require('express');
-var router = express.Router();
+
 
 const AccountModel = require('../../models/AccountModel')
 const moment = require('moment')
 const checkIsLoginMiddleware = require('../../middlewares/checkLogin')
+
+var router = express.Router();
 // 首页
 router.get('/', checkIsLoginMiddleware, async function (req, res, next) {
 
