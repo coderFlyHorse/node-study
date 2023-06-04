@@ -10,6 +10,7 @@ var authRouter = require('./routes/web/auth');
 const { DBHOOST, DBPORT, DBNAME } = require('./config/config')
 //导入account路由
 const accountRouter = require('./routes/api/account')
+const authApiRouter = require('./routes/api/auth')
 var app = express();
 app.use(session({
   name: 'sid', // sessionid 的名称
@@ -33,8 +34,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api', accountRouter);
 app.use('/', authRouter);
+app.use('/api', accountRouter);
+app.use('/api', authApiRouter);
+
 
 
 // catch 404 and forward to error handler
