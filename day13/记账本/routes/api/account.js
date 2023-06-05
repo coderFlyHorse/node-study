@@ -1,48 +1,33 @@
 const express = require('express');
-const router = express.Router();
+const checkTokenMiddleware = require('../../middlewares/checkTokenMiddleware')
+
 const jwt = require('jsonwebtoken')
 const AccountModel = require('../../models/AccountModel')
 const moment = require('moment')
 /* GET home page. */
-router.get('/account',  function (req, res, next) {
+// 中间件
+const router = express.Router();
+router.get('/account', checkTokenMiddleware, async function (req, res, next) {
 
     try {
-        let token = req.get('token')
-        console.log(token)
-        if (!token) {
-            return res.json({ code: '1002', msg: 'token 缺失', data: null })
-        }
-         jwt.verify(token, 'bilibili', async (err, data) => {
-            if (err) {
-                return res.json({ code: "2004", msg: 'token 校验失败', data: null })
-            }
-            let accounts = await AccountModel.find().sort({ time: -1 })
-            res.json({ code: '0000', msg: '读取成功', data: accounts })
-        })
-
-
+        // req.user 中存放了用户的{ username: 'admin', iat: 1685885579, exp: 1686490379 }
+        console.log(req.user,"用户信息")
+        let accounts = await AccountModel.find().sort({ time: -1 })
+        res.json({ code: '0000', msg: '读取成功', data: accounts })
 
     }
     catch (err) {
-        console.log(err)
-        res.json({ code: '1001', msg: '读取失败~~', data: err.errors.title.properties.message })
+
+        res.json({ code: '1001', msg: '读取失败~~', data: null })
     }
-
-
-
-
-    // 前后端分离 MVVM
-
-    //  MVC
-    // res.render("list", { accounts, moment });
 });
 // 
-router.get('/account/create', function (req, res, next) {
+router.get('/account/create', checkTokenMiddleware, function (req, res, next) {
     res.render("create");
 });
 
 // 新增记录
-router.post('/account', async function (req, res, next) {
+router.post('/account', checkTokenMiddleware,async function (req, res, next) {
     // 处理日期数据
     try {
         let data = await AccountModel.create({ ...req.body, time: moment(req.body.time).toDate() })
@@ -58,10 +43,11 @@ router.post('/account', async function (req, res, next) {
     // res.render("success", { msg: "", url: "/account" });
 });
 
-router.delete("/account/:id", async (req, res) => {
+router.delete("/account/:id", checkTokenMiddleware, async (req, res) => {
     let { id } = req.params;
     // 删除
     try {
+        console.log(req.user)
         let result = await AccountModel.deleteOne({ _id: id })
         console.log(result)
         if (result.deletedCount == 0) {
@@ -83,7 +69,7 @@ router.delete("/account/:id", async (req, res) => {
 
 })
 // 获取单个账单的信息
-router.get("/account/:id", async (req, res) => {
+router.get("/account/:id", checkTokenMiddleware, async (req, res) => {
     let { id } = req.params;
     // 删除
     try {
@@ -107,7 +93,7 @@ router.get("/account/:id", async (req, res) => {
 
 })
 // 修改单个账单的信息
-router.patch("/account/:id", async (req, res) => {
+router.patch("/account/:id", checkTokenMiddleware, async (req, res) => {
     let { id } = req.params;
     console.log(id)
     // 删除
